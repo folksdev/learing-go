@@ -25,12 +25,12 @@ func main() {
 	}
 
 	// multiple branches with else if
-	grade := 35
+	grade := 100
 
-	if grade == 100 {
-		fmt.Println("Perfect")
-	} else if grade > 60 {
+	if grade > 60 {
 		fmt.Println("Pass")
+	} else if grade == 100 {
+		fmt.Println("Perfect")
 	} else {
 		fmt.Println("Fail")
 	}
@@ -51,7 +51,7 @@ func main() {
 	}
 
 	if true && false {
-
+		fmt.Println("I wont be printed")
 	}
 
 	if false && true {

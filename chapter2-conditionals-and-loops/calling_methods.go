@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var now time.Time = time.Now()         // time.Now returns a time.Type value representing current date time
-	var day, month, year = now.Date()      // Date returs a triplet for (day: Int, month: Month, year:Int)
+	var year, month, day = now.Date()      // Date returs a triplet for (day: Int, month: Month, year:Int)
 	fmt.Println("Date:", day, month, year) // Print date with components
 	fmt.Println("Type of day:", reflect.TypeOf(day))
 	fmt.Println("Type of month:", reflect.TypeOf(month))

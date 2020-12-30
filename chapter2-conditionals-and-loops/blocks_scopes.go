@@ -1,16 +1,24 @@
-// This file won't compile
 package main // package block
 
 import "fmt"
 
-// declare global variable
+var name = "folksdev" // declare global variable
 
 func main() { // function block
+
+	var name2 = "asdf "
+	fmt.Println(name)
+	fmt.Println(name2)
 
 	// declare function variable
 	aVal := 5
 	fmt.Println(aVal)
 	if true { // if block
+
+		name2 := 20
+		fmt.Println(name)
+		fmt.Println(name2)
+
 		conditionVal := 20 // in codition scope
 		fmt.Println(conditionVal)
 

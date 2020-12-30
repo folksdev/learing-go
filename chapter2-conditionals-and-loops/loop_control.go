@@ -6,9 +6,9 @@ func main() {
 
 	// continue skips to the head of the loop block without executing the rest
 	for x := 0; x <= 10; x++ {
-		fmt.Println("before continue")
+		fmt.Println("before continue", x)
 		continue
-		fmt.Println("after continue")
+		fmt.Println("after continue", x)
 	}
 	fmt.Println("after continue example")
 
