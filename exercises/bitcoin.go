@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/leekchan/accounting"
@@ -12,6 +13,7 @@ import (
 type Time struct {
 	Updated    string
 	UpdatedIso string
+	UpdatedUk  string
 }
 
 type Currency struct {
@@ -24,6 +26,7 @@ type Currency struct {
 type Bpi struct {
 	Usd Currency
 	Eur Currency
+	Gbp Currency
 }
 
 type ApiResponse struct {
@@ -33,20 +36,25 @@ type ApiResponse struct {
 }
 
 func main() {
-	fmt.Println("Starting the application...")
 	response, err := http.Get("https://api.coindesk.com/v1/bpi/currentprice.json")
 	if err != nil {
-		fmt.Printf("The HTTP request failed with error %s\n", err)
-	} else {
+		log.Fatal(err)
+	}
+
+	if response.StatusCode == 200 {
 		data, _ := ioutil.ReadAll(response.Body)
 		//fmt.Println(string(data))
-		var parsed ApiResponse
-		json.Unmarshal(data, &parsed)
 
-		//fmt.Println(parsed)
+		var apiResponse ApiResponse
+		json.Unmarshal(data, &apiResponse)
+
+		//fmt.Println(apiResponse)
 
 		ac := accounting.Accounting{Symbol: "$", Precision: 4}
-		fmt.Println(parsed.Time.Updated, " - Bitcoin (USD)", ac.FormatMoney(parsed.Bpi.Usd.Rate_Float))
+		fmt.Println("Last Updated:", apiResponse.Time.Updated, " Bitcoin (USD): ", ac.FormatMoney(apiResponse.Bpi.Usd.Rate_Float))
+
+	} else {
+		fmt.Println("Http call failed with status: ", response.Status)
 	}
 
 }
